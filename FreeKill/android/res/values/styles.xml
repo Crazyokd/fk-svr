@@ -1,0 +1,7 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later !-->
+<resources>
+  <style name="FkTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+    <item name="android:windowEnableSplitTouch">false</item>
+    <item name="android:splitMotionEvents">false</item>
+  </style>
+</resources>

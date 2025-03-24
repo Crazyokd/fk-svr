@@ -1,0 +1,58 @@
+# Compile output
+/build/
+/docs/build
+/docs/.venv
+/*.o
+/zh_CN.qm
+/en_US.qm
+/vi_VN.qm
+/fk_ver
+
+# IDE & LSP
+/.kdev4/
+/.vscode/
+/*.user
+*-swp
+/*.kdev4
+/.cache/
+/tags
+# /.luarc.json
+/.qmllint.ini
+
+# file produced by game
+/FreeKill
+/FreeKill.exe
+/mymod
+/recording
+freekill-wrap.cxx
+/server/*
+!/server/init.sql
+/client/client.db
+/client/autosave_recording
+/freekill.client.config.json
+/freekill.server.config.json
+/freekill.server.error.log
+/freekill.server.info.log
+/flist.txt
+/server-list.json
+
+# windeployqt
+/bearer/
+/iconengines/
+/imageformats/
+/platforms/
+/Qt/
+/QtGraphicalEffects/
+/QtQuick/
+/QtQuick.2/
+/Qt5Compat/
+/QtQml/
+/QtMultimedia/
+/multimedia/
+/qmltooling/
+/sqldrivers/
+/styles/
+/tls/
+/translations/
+/*.dll
+/*.bat

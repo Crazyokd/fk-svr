@@ -1,0 +1,9 @@
+{
+  "workspace.ignoreDir": [
+    "/lua",
+    "/packages/*",
+    "!/packages/freekill-core",
+    "!/packages/utility",
+    "test_*.lua"
+  ]
+}

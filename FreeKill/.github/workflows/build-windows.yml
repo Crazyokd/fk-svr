@@ -1,0 +1,124 @@
+name: Build For Windows 10+
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+
+    - name: Checkout Git Repo
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: Install swig
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install swig -y
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        py7zrversion: '>=0.20.2'
+        version: '6.5.3'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw'
+        modules: 'qtmultimedia qt5compat qtshadertools'
+        tools: 'tools_opensslv3_x64'
+
+    - name: Disable PCH
+      shell: bash
+      run: |
+        cd src
+        find -name "*.cpp" -exec sed -i '1i #include "pch.h"' "{}" \;
+        find -name "*.h" -exec sed -i '1i #include "pch.h"' "{}" \;
+        sed -i '1d' pch.h
+        sed -i '1d' main.cpp
+        sed -i '/pch.h/d' CMakeLists.txt
+
+    - name: Configure CMake Project
+      working-directory: ${{github.workspace}}
+      env:
+        CMAKE_PREFIX_PATH: ${{env.Qt6_Dir}}
+        OPENSSL_ROOT_DIR: ${{env.Qt6_Dir}}/../../Tools/OpenSSLv3/Win_x64
+        OPENSSL_INCLUDE_DIR: ${{env.OPENSSL_ROOT_DIR}}/include
+        OPENSSL_CRYPTO_LIBRARY: ${{env.OPENSSL_ROOT_DIR}}/bin/libcrypto-3-x64.dll
+      run: |
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -G "MinGW Makefiles" -B ${{github.workspace}}/build
+
+    - name: Build project
+      working-directory: ${{github.workspace}}/build
+      run: mingw32-make -j2
+
+   # - name: Setup tmate session
+   #   uses: mxschmitt/action-tmate@v3
+   #   timeout-minutes: 15
+
+    - name: Compress portable program
+      working-directory: ${{github.workspace}}
+      shell: bash
+      run: |
+        mkdir FreeKill-release
+        cp build/FreeKill.exe FreeKill-release
+        cp -r Fk FreeKill-release
+        cd FreeKill-release
+        windeployqt FreeKill.exe
+        cp -r ../.git .
+        git restore .
+        rm -rf .git* android doc lib lang translations src
+        curl https://raw.githubusercontent.com/Qsgs-Fans/freekill-server-list/master/server-list.json > server-list.json
+        cd ..
+        cp lib/win/* FreeKill-release
+        cp build/zh_CN.qm FreeKill-release
+        cp build/en_US.qm FreeKill-release
+        cp fk_ver FreeKill-release
+        cp ../Qt/6.5.3/mingw_64/bin/li*.dll FreeKill-release
+        cp ../Qt/Tools/OpenSSLv3/Win_x64/bin/*.dll FreeKill-release
+        7z a -t7z FreeKill-release.7z FreeKill-release -r -mx=9 -m0=LZMA2 -ms=10m -mf=on -mhc=on -mmt=on
+
+    - name: Upload Release
+      uses: actions/upload-artifact@v3
+      with:
+        name: zip
+        path: FreeKill-release.7z
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Git Repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Get Previous tag
+      id: previoustag
+      uses: WyriHaximus/github-action-get-previous-tag@v1
+      with:
+        fallback: 0.0.1
+
+    - name: Download zip from build
+      uses: actions/download-artifact@v3
+      with:
+        name: zip
+        path: zip
+
+    - name: Rename 7z
+      run: |
+        mv zip/FreeKill-release.7z zip/FreeKill-${{ steps.previoustag.outputs.tag }}.7z
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      with:
+        token: ${{ secrets.MY_TOKEN }}
+        tag_name: ${{ steps.previoustag.outputs.tag }}
+        files: zip/FreeKill-${{ steps.previoustag.outputs.tag }}.7z

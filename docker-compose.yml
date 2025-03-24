@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  fk-svr:
+    image: fk-svr
+    container_name: fk-svr
+    ports:
+      - '9527:9527'
+    #command: ./FreeKill -s
+    command: sleep infinity
+    working_dir: /work/FreeKill
