@@ -1,0 +1,39 @@
+[submodule "FreeKill/packages/freekill-core"]
+	path = FreeKill/packages/freekill-core
+	url = https://gitee.com/Qsgs-Fans/freekill-core
+[submodule "FreeKill/packages/jsrg"]
+	path = FreeKill/packages/jsrg
+	url = https://gitee.com/Qsgs-Fans/jsrg
+[submodule "FreeKill/packages/mobile"]
+	path = FreeKill/packages/mobile
+	url = https://gitee.com/Qsgs-Fans/mobile
+[submodule "FreeKill/packages/mobile_effect"]
+	path = FreeKill/packages/mobile_effect
+	url = https://gitee.com/notify-ctrl/mobile_effect
+[submodule "FreeKill/packages/mougong"]
+	path = FreeKill/packages/mougong
+	url = https://gitee.com/Qsgs-Fans/mougong
+[submodule "FreeKill/packages/ol"]
+	path = FreeKill/packages/ol
+	url = https://gitee.com/Qsgs-Fans/ol
+[submodule "FreeKill/packages/shzl"]
+	path = FreeKill/packages/shzl
+	url = https://gitee.com/Qsgs-Fans/shzl
+[submodule "FreeKill/packages/sp"]
+	path = FreeKill/packages/sp
+	url = https://gitee.com/Qsgs-Fans/sp
+[submodule "FreeKill/packages/standard_ex"]
+	path = FreeKill/packages/standard_ex
+	url = https://gitee.com/Qsgs-Fans/standard_ex
+[submodule "FreeKill/packages/tenyear"]
+	path = FreeKill/packages/tenyear
+	url = https://gitee.com/Qsgs-Fans/tenyear
+[submodule "FreeKill/packages/tuguo"]
+	path = FreeKill/packages/tuguo
+	url = https://gitee.com/Qsgs-Fans/tuguo
+[submodule "FreeKill/packages/utility"]
+	path = FreeKill/packages/utility
+	url = https://gitee.com/Qsgs-Fans/utility
+[submodule "FreeKill/packages/yj"]
+	path = FreeKill/packages/yj
+	url = https://gitee.com/Qsgs-Fans/yj
