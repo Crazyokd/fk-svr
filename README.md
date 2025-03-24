@@ -1,4 +1,7 @@
 # 新月杀5.4私服搭建
+```拉取所有扩展
+git submodule update --init --checkout
+```
 # 使用容器运行
 
 1. 以ubuntu22.04作为基础镜像
@@ -44,13 +47,4 @@ mdkir build && cd build && cmake .. && make
 # remove liblua5.4-dev and install liblua5.4
 ln -s build/FreeKill
 ./FreeKill -s
-```
-
-# 安装扩展提高游戏体验
-```shell
-fk> install https://gitee.com/Qsgs-Fans/utility
-fk> install https://gitee.com/qsgs-fans/mobile
-fk> install https://gitee.com/qsgs-fans/tenyear
-fk> install https://gitee.com/qsgs-fans/shzl
-fk> install https://gitee.com/qsgs-fans/OL
 ```
