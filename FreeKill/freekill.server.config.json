@@ -1,0 +1,12 @@
+{
+  "banwords": [],
+  "description": "FreeKill Server",
+  "iconUrl": "default",
+  "capacity": 20,
+  "tempBanTime": 0,
+  "motd": "Welcome!",
+  "hiddenPacks": [],
+  "enableBots": true,
+  "roomCountPerThread": 2000,
+  "maxPlayersPerDevice": 5
+}

@@ -30,7 +30,7 @@ freekill-wrap.cxx
 /client/client.db
 /client/autosave_recording
 /freekill.client.config.json
-/freekill.server.config.json
+# /freekill.server.config.json
 /freekill.server.error.log
 /freekill.server.info.log
 /flist.txt
